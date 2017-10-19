@@ -122,6 +122,11 @@ class Table extends Border
     private $unit = self::WIDTH_AUTO;
 
     /**
+     * @var int|float indendation value
+     */
+    private $indent = 0;
+
+    /**
      * Create new table style
      *
      * @param mixed $tableStyle
@@ -587,6 +592,28 @@ class Table extends Border
         $enum = array(self::WIDTH_AUTO, self::WIDTH_PERCENT, self::WIDTH_TWIP);
         $this->unit = $this->setEnumVal($value, $enum, $this->unit);
 
+        return $this;
+    }
+
+    /**
+     * Get indent
+     *
+     * @return int|float
+     */
+    public function getIndent()
+    {
+        return $this->indent;
+    }
+
+    /**
+     * Set indent
+     *
+     * @param int|float $value
+     * @return self
+     */
+    public function setIndent($value = null)
+    {
+        $this->indent = $this->setNumericVal($value, $this->indent);
         return $this;
     }
 

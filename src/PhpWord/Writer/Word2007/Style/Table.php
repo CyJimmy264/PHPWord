@@ -69,6 +69,9 @@ class Table extends AbstractStyle
         // w:tblPr
         $xmlWriter->startElement('w:tblPr');
 
+        // Table indent
+        $this->writeIndent($xmlWriter, $style->getIndent());
+
         // Table alignment
         if ('' !== $style->getAlignment()) {
             $tableAlignment = new TableAlignment($style->getAlignment());
@@ -92,6 +95,21 @@ class Table extends AbstractStyle
         if ($firstRow instanceof TableStyle) {
             $this->writeFirstRow($xmlWriter, $firstRow);
         }
+    }
+
+    /**
+     * Write indent.
+     *
+     * @param \PhpOffice\Common\XMLWriter $xmlWriter
+     * @param  int|float $indent
+     * @return void
+     */
+    protected function writeIndent(XMLWriter $xmlWriter, $indent)
+    {
+        $xmlWriter->startElement('w:tblInd');
+        $xmlWriter->writeAttribute('w:w', $indent);
+        $xmlWriter->writeAttribute('w:type', "dxa");
+        $xmlWriter->endElement();
     }
 
     /**
